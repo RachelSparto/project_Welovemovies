@@ -24,12 +24,14 @@ function read(req, res) {
 }
 
 async function listTheatersForMovie(req, res) {
-  const data = await service.listTheatersForMovie(res.locals.movie.movie_id);
+  const { movieId } = req.params;
+  const data = await service.listTheatersForMovie(movieId);
   res.send({ data });
 }
 
 async function listReviews(req, res) {
-  const data = await service.listReviews(res.locals.movie.movie_id);
+  const { movieId } = req.params;
+  const data = await service.listReviews(movieId);
   res.send({ data });
 }
 

@@ -1,4 +1,5 @@
 const knex = require("../db/connection");
+const mapProperties = require("../utils/map-properties");
 
 const addCriticDetails = mapProperties({
   critic_id: "critic.critic_id",
@@ -8,7 +9,7 @@ const addCriticDetails = mapProperties({
 });
 
 function list() {
-  return knex("movies").select("*");
+  return knex("movies");
 }
 
 function inTheatersNow() {
@@ -19,8 +20,8 @@ function inTheatersNow() {
     .groupBy("m.movie_id");
 }
 
-function read(id) {
-  return knex("movies").where({ id }).first();
+function read(movieId) {
+  return knex("movies").where({ movie_id: movieId }).first();
 }
 
 function listTheatersForMovie(movieId) {
@@ -51,4 +52,5 @@ module.exports = {
   inTheatersNow,
   read,
   listTheatersForMovie,
+  listReviews,
 };
